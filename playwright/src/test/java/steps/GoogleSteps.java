@@ -12,13 +12,15 @@ public class GoogleSteps {
 	private BrowserContext context;
 
 	@Given("I open the saucedemo page")
-	public void iOpenTheGoogleHomepage() {
+	public void launchSauceDemo() {
 		Playwright playwright = Playwright.create();
 		browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+		context = browser.newContext();
+		page = context.newPage();
 	}
 
 	@And("Enter the credentials")
-	public void iSearchFor() {
+	public void enterCredentials() {
 		page.waitForTimeout(5000);
 		page.locator("input[id='user-name']").fill("standard_user");
 		page.locator("input[id='password']").fill("secret_sauce");
